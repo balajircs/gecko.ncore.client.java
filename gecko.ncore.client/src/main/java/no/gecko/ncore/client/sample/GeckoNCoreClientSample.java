@@ -21,14 +21,9 @@ import no.gecko.ncore.client.core.ObjectModel;
 
 import org.apache.commons.io.FileUtils;
 
-public class RunJavaNcoreClient {
+public class GeckoNCoreClientSample {
 
-	// ADD CREDENTIALS
-	static String username = "SA";
-	static String password = "SA";
-	static String database = "ephorte";
-
-	// ADD TEST FILES
+	// test files
 	static File testFile1 = new File("resources/docs/test.pdf");
 	static File testFile2 = new File("resources/docs/test.pdf");
 
@@ -140,8 +135,8 @@ public class RunJavaNcoreClient {
 
 		NCore.Objects.update(ca);
 
-		List<DataObjectT> cases = NCore.Objects.filteredQuery(
-				ObjectModel.Case, "Id=" + caseId, new String[] {}, null, null);
+		List<DataObjectT> cases = NCore.Objects.filteredQuery(ObjectModel.Case,
+				"Id=" + caseId, new String[] {}, null, null);
 		ca = (CaseT) cases.get(0);
 		System.out.println(ca.getTitle());
 
