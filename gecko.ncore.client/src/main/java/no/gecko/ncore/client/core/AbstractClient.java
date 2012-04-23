@@ -192,9 +192,33 @@ class AbstractClient {
 		}
 	}
 
-	protected void serToJavaRefs(DataObjectT[] dataObjects) throws Exception {
+	protected void restoreJavaRefs(DataObjectT... dataObjects) throws Exception {
 
-		// TODO
+		for (DataObjectT dataObject : dataObjects) {
+
+			Field[] fields = dataObject.getClass().getDeclaredFields();
+
+			for (Field field : fields) {
+
+				field.setAccessible(true);
+
+				Object fieldValue = field.get(dataObject);
+
+				if (fieldValue == null) {
+					continue;
+				}
+
+				if (DataObjectT.class.isAssignableFrom(fieldValue.getClass())) {
+
+					// point to the original object
+					Object originalObject = ((DataObjectT) fieldValue).getRef();
+					field.set(dataObject, originalObject);
+
+					// remove the serialization reference
+					((DataObjectT) fieldValue).setRef(null);
+				}
+			}
+		}
 	}
 
 	protected void updateOriginalObjects(DataObjectT[] originalObjects,
@@ -214,8 +238,17 @@ class AbstractClient {
 			for (Field field : newObjectFields) {
 
 				field.setAccessible(true);
-
 				Object newObjectFieldValue = field.get(newObject);
+
+				// ignore DataObjectT fields, i.e. preserve original Java
+				// references
+				if (newObjectFieldValue == null
+						|| DataObjectT.class
+								.isAssignableFrom(newObjectFieldValue
+										.getClass())) {
+					continue;
+				}
+
 				if (newObjectFieldValue != null) {
 					field.set(originalObject, newObjectFieldValue);
 				}

@@ -21,6 +21,6 @@
 		</service>
 	</services>
 
-	<clientPoolSize>3</clientPoolSize>
+	<clientPoolSize>1</clientPoolSize>
 
 </config>

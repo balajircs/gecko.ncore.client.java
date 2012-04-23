@@ -75,7 +75,8 @@ class NCoreClient extends AbstractClient {
 		CheckinMessageE checkin = new CheckinMessageE();
 		checkin.setContent(contents);
 
-		DocumentCriteriaT tmpDocumentCriteria = getDocFactory().createDocumentCriteriaT(); 
+		DocumentCriteriaT tmpDocumentCriteria = getDocFactory()
+				.createDocumentCriteriaT();
 
 		tmpDocumentCriteria.setDocumentId(documentDescriptionId);
 		tmpDocumentCriteria.setEphorteIdentity(getDocIdentity());
@@ -126,6 +127,10 @@ class NCoreClient extends AbstractClient {
 			String filterExpression, String[] relatedObjects,
 			Integer skipCount, Integer takeCount) throws Exception {
 
+		if (relatedObjects == null) {
+			relatedObjects = new String[] {};
+		}
+
 		FilteredQueryArgumentsT queryArgs = new FilteredQueryArgumentsT();
 		queryArgs.setDataObjectName(objectName);
 		queryArgs.setFilterExpression(filterExpression);
@@ -162,6 +167,9 @@ class NCoreClient extends AbstractClient {
 				arrDataObjects);
 
 		List<DataObjectT> createdObjects = result.getDataObject();
+
+		// restore original Java references
+		restoreJavaRefs(dataObjects);
 
 		// update original objects
 		updateOriginalObjects(dataObjects, createdObjects);

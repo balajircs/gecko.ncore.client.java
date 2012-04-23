@@ -1,4 +1,4 @@
-package no.gecko.ncore.client.test;
+package no.gecko.ncore.client.sample;
 
 import java.io.File;
 import java.text.DateFormat;

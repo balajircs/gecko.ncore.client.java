@@ -1,6 +1,8 @@
 # Uses JDK6 and JAXWS 2.2 to generate client-side code.
 # Make sure that the JAXWS 2.2 jars are in the endorsed directory when
 # generating the code and not there when running it.
+#
+# Generated code should run fine on JDK7.
 
 ../bin/wsimport.sh -b jaxb_bindings/om_bindings_v3.xml -extension -clientjar om_service_v3_en.jar http://geckois.gecko.no/nCore/Services/ObjectModel/V3/En/ObjectModelService.svc?wsdl
 
