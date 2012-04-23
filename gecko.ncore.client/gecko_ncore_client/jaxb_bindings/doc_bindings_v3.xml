@@ -1,0 +1,60 @@
+<jxb:bindings version="2.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<jxb:globalBindings generateElementProperty="false" />
+
+	<jxb:bindings
+		schemaLocation="http://geckois.gecko.no/nCore/Services/Documents/V3/DocumentService.svc?xsd=xsd0"
+		node="/xs:schema">
+
+		<jxb:schemaBindings>
+			<jxb:nameXmlTransform>
+				<jxb:elementName suffix="E" />
+				<jxb:typeName suffix="T" />
+				<jxb:modelGroupName suffix="MG" />
+				<jxb:anonymousTypeName suffix="A" />
+			</jxb:nameXmlTransform>
+		</jxb:schemaBindings>
+
+	</jxb:bindings>
+
+	<jxb:bindings
+		schemaLocation="http://geckois.gecko.no/nCore/Services/Documents/V3/DocumentService.svc?xsd=xsd1"
+		node="/xs:schema">
+
+		<jxb:bindings node="//xs:complexType[@name='EphorteIdentity']">
+			<jxb:class name="DocumentIdentity"/>
+		</jxb:bindings>
+
+		<jxb:schemaBindings>
+			<jxb:nameXmlTransform>
+				<jxb:elementName suffix="E" />
+				<jxb:typeName suffix="T" />
+				<jxb:modelGroupName suffix="MG" />
+				<jxb:anonymousTypeName suffix="A" />
+			</jxb:nameXmlTransform>
+		</jxb:schemaBindings>
+
+	</jxb:bindings>
+
+	<jxb:bindings
+		schemaLocation="http://geckois.gecko.no/nCore/Services/Documents/V3/DocumentService.svc?xsd=xsd2"
+		node="/xs:schema">
+
+		<jxb:schemaBindings>
+			<jxb:nameXmlTransform>
+				<jxb:elementName suffix="E" />
+				<jxb:typeName suffix="T" />
+				<jxb:modelGroupName suffix="MG" />
+				<jxb:anonymousTypeName suffix="A" />
+			</jxb:nameXmlTransform>
+		</jxb:schemaBindings>
+
+	</jxb:bindings>
+
+
+
+</jxb:bindings>
+
+ 
+

@@ -1,0 +1,26 @@
+<config>
+
+	<username>SA</username>
+	<password>SA</password>
+	<database>ephorte</database>
+
+	<services>
+		<service id="objectModelService">
+			<address>http://geckois.gecko.no/nCore/Services/ObjectModel/V3/En/ObjectModelService.svc</address>
+			<binding>http</binding>
+		</service>
+
+		<service id="documentService">
+			<address>http://geckois.gecko.no/nCore/Services/Documents/V3/DocumentService.svc</address>
+			<binding>http</binding>
+		</service>
+
+		<service id="functionsService">
+			<address>http://geckois.gecko.no/nCore/Services/Functions/V2/FunctionsService.svc</address>
+			<binding>http</binding>
+		</service>
+	</services>
+
+	<clientPoolSize>3</clientPoolSize>
+
+</config>
