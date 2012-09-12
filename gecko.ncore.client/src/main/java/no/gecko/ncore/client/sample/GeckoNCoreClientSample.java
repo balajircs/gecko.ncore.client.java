@@ -43,7 +43,6 @@ public class GeckoNCoreClientSample {
 		walkStructure();
 		doSearches();
 		testFunctions();
-
 	}
 
 	private static void createStructure() throws Exception {
@@ -106,10 +105,19 @@ public class GeckoNCoreClientSample {
 		NCore.Objects.insert(dobj2);
 
 		// check in a new document version
-		byte[] testFile2Contents = FileUtils.readFileToByteArray(testFile2);
+		byte[] testFileToUpload = FileUtils.readFileToByteArray(testFile2);
+		System.out.println("testFileToUpload file content length: " + testFileToUpload.length);
 		NCore.Documents.checkin(dd.getId(), "P", dobj2.getVersionNumber(),
-				UUID.randomUUID(), "", testFile2Contents);
+				UUID.randomUUID(), "", testFileToUpload);
 
+		// read the content of the checked in file by registryEntryId
+		byte[] getDocumentContentByRegistryEntryIdFileConent = NCore.Documents.getDocumentContentByRegistryEntryId(re.getId());
+		System.out.println("getDocumentContentByRegistryEntryId file content length: " + getDocumentContentByRegistryEntryIdFileConent.length);
+		
+		// read the content of the checked in file by registryEntryId
+		byte[] getDocumentContentFileContent = NCore.Documents.getDocumentContent(dobj2.getDocumentDescriptionId(), dobj2.getVersionNumber(), dobj2.getVariantFormatId());
+		System.out.println("getDocumentContentFileContent file content length: " + getDocumentContentFileContent.length);
+		
 		caseId = ca.getId();
 		casePartyId = cp.getId();
 		System.out.println("case party id  : " + casePartyId);

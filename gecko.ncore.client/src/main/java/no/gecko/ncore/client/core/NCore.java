@@ -120,6 +120,29 @@ public class NCore {
 			}
 		}
 
+		public static byte[] getDocumentContentByRegistryEntryId(int journalpostId) throws Exception {
+			NCoreClient client = null;
+			try {
+				client = ClientPool.get().borrowObject();
+				return client.getDocumentContentByRegistryEntryId(journalpostId);
+			} finally {
+				if (client != null) {
+					ClientPool.get().returnObject(client);
+				}
+			}
+		}
+		
+		public static byte[] getDocumentContent(int documentId, int version, String variant) throws Exception{
+			NCoreClient client = null;
+			try {
+				client = ClientPool.get().borrowObject();
+				return client.getDocumentContent(documentId, version, variant);
+			} finally {
+				if (client != null) {
+					ClientPool.get().returnObject(client);
+				}
+			}
+		}
 	}
 
 	public static class Functions {

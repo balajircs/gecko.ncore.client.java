@@ -10,6 +10,9 @@ import no.gecko.ephorte.services.documents.v3.CheckinMessageE;
 import no.gecko.ephorte.services.documents.v3.CheckoutRequestE;
 import no.gecko.ephorte.services.documents.v3.CheckoutResponseMessageE;
 import no.gecko.ephorte.services.documents.v3.DocumentCriteriaT;
+import no.gecko.ephorte.services.documents.v3.DocumentReturnMessageE;
+import no.gecko.ephorte.services.documents.v3.GetDocumentContentMessageE;
+import no.gecko.ephorte.services.documents.v3.GetJournalpostDocumentContentMessageE;
 import no.gecko.ephorte.services.documents.v3.UploadMessageE;
 import no.gecko.ephorte.services.functions.v2.ArrayOfFunctionDescriptor;
 import no.gecko.ephorte.services.functions.v2.FunctionDescriptor;
@@ -121,6 +124,28 @@ class NCoreClient extends AbstractClient {
 				new CheckoutRequestE());
 
 		return checkoutResponse.getContent();
+	}
+	
+	public byte[] getDocumentContentByRegistryEntryId(int journalpostId){
+		getDocProvider().setOutboundHeaders(
+				getDocFactory().createJournalpostId(journalpostId), 
+				getDocFactory().createIdentity(getDocIdentity()));
+		
+		DocumentReturnMessageE getDocumentContentResponse = getDocClient().getDocumentContentByJournalPostId(new GetJournalpostDocumentContentMessageE());
+		
+		return getDocumentContentResponse.getContent();
+	}
+	
+	public byte[] getDocumentContent(int documentId, int version, String variant){
+		getDocProvider().setOutboundHeaders(
+				getDocFactory().createDocumentId(documentId), 
+				getDocFactory().createVersion(version),
+				getDocFactory().createVariant(variant),
+				getDocFactory().createIdentity(getDocIdentity()));
+		
+		DocumentReturnMessageE getDocumentContentResponse = getDocClient().getDocumentContentBase(new GetDocumentContentMessageE());
+		
+		return getDocumentContentResponse.getContent();
 	}
 
 	public List<DataObjectT> filteredQuery(String objectName,
